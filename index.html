@@ -4,9 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mi pagina web</title>
+
 </head>
 <body>
-    
+    <div class="card text-bg-dark mb-3">
+        <div class="card-header">REGISTRO DE ALUMNOS</div>
+        <div class="card-body">
+            <form id="fmrAlumno">
+                <div class="row">
+                    <div class="col-md-2 col-md-3">
+                        <label for="txtCodigoAlumno">CODIGO:</label>
+                    </div>
+                    <div class="col-3 col-md-3">
+                        <input required pattern="[0-9]{3}"
+                            title="Ingrese el codigo del alumno de 3 digitos"
+                                type="text" class="form-control-sm" name="txtCodigoAlumno" id="txtCodigoAlumno">
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-3 col-md-2">
+                        <label for="txtNombreAlumno">NOMBRE</label>
+                    </div>
+                    <div class="col-9 col-md-6">
+                        <input required pattern="[A-Za-zÑñáéíóú ]{3,75}"
+                            title="Ingrese Nombre"
+                                type="text" class="form-control-sm" name="txtNombreAlumno" id="txtNombreAlumno">
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-3 col-md-2">
+                        <label for="txtSexo">SEXO:</label>
+                    </div>
+                    <div class="col-9 col-md-6">
+                        <input type="radio" name="sexo" value="h" /> HOMBRE <input type="radio" name="sexo" value="m" /> MUJER 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 col-md-2">
+                        <label for="txtDireccion">DIRECCION</label>
+                    </div>   
+                    <div class="col-md-9 col-md-6">
+                        <input required pattern="[A-Za-zÑñáéíóú ]"
+                            title="ingrese una direccion exacta"
+                                type="text" class="form.control.sm" name="txtDireccion" id="txtDireccion">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 col-md-2">
+                        <Label for="txtDepartamento">DEPARTAMENTO</Label>
+                        <input class="form-control" list="listDatos" id="listDatos" placeholder="Escribe para buscar..." name="seach">
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        
+    </div>
 </body>
 </html>
