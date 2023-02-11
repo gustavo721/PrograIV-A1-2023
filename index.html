@@ -6,60 +6,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi pagina web</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="card text-bg-dark mb-3">
-        <div class="card-header">REGISTRO DE ALUMNOS</div>
-        <div class="card-body">
-            <form id="fmrAlumno">
-                <div class="row">
-                    <div class="col-md-2 col-md-3">
-                        <label for="txtCodigoAlumno">CODIGO:</label>
-                    </div>
-                    <div class="col-3 col-md-3">
-                        <input required pattern="[0-9]{3}"
-                            title="Ingrese el codigo del alumno de 3 digitos"
-                                type="text" class="form-control-sm" name="txtCodigoAlumno" id="txtCodigoAlumno">
-                    </div>
-                </div>  
-                <div class="row">
-                    <div class="col-3 col-md-2">
-                        <label for="txtNombreAlumno">NOMBRE</label>
-                    </div>
-                    <div class="col-9 col-md-6">
-                        <input required pattern="[A-Za-zÑñáéíóú ]{3,75}"
-                            title="Ingrese Nombre"
-                                type="text" class="form-control-sm" name="txtNombreAlumno" id="txtNombreAlumno">
-                    </div>
-                </div> 
-                <div class="row">
-                    <div class="col-3 col-md-2">
-                        <label for="txtSexo">SEXO:</label>
-                    </div>
-                    <div class="col-9 col-md-6">
-                        <input type="radio" name="sexo" value="h" /> HOMBRE <input type="radio" name="sexo" value="m" /> MUJER 
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                <div class="card-header">REGISTRO DE ALUMNO</div>
+                    <div class="card-body">
+                        <form id="fmrAlumno" @reset.prevent="nuevoAlumno()" v-on:submit.prevent="gurdarAlumno">
+                            <div class="row p-1">
+                                <div class="col-md-2 col-md-2">
+                                    <label for="txtCodigoAlumno">CODIGO:</label>
+                                </div>
+                                <div class="col-2 col-md-4">
+                                    <input required pattern="[0-9]{3}"
+                                        title="Ingrese el codigo del alumno de 3 digitos"
+                                            v-model="alumno.codigo" type="text" class="form-control" name="txtCodigoAlumno" id="txtCodigoAlumno" placeholder="Ej: 123">
+                                </div>
+                                </div>  
+                                <div class="row p-1">
+                                    <div class="col-md-2 col-md-2">
+                                        <label for="txtNombreAlumno">NOMBRE: </label>
+                                    </div>
+                                    <div class="col-md-9 col-md-6">
+                                        <input required pattern="[A-Za-zÑñáéíóú ]{3,75}"
+                                            title="Ingrese Nombre"
+                                                v-model="alumno.nombre" type="text" class="form-control" name="txtNombreAlumno" id="txtNombreAlumno" placeholder="Ej:Gustavo Gomez">
+                                    </div>
+                                </div> 
+                                <div class="row p-1">
+                                    <div class="col-md-2 col-md-2">
+                                        <label for="txtSexo">SEXO:</label>
+                                    </div>
+                                    <div class="col-9 col-md-6">
+                                        <input type="radio" name="sexo" value="h" /> HOMBRE <input type="radio" name="sexo" value="m" /> MUJER 
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row p-1">
+                                    <div class="col-md-2 col-md-9">
+                                        <label for='Departamento'>DEPARTAMENTO</label>
+                                        <select id='departamento' name='departamento'>
+                                        <option value=''>Seleccione</option>
+                                        <option>Ahuachapan</option>
+                                        <option>Santa Ana</option>
+                                        <option>Chalatenango</option>
+                                        <option>La Libertad</option>
+                                        <option>Sonsonate</option>
+                                        <option>San Salvador</option>
+                                        <option>Cuscatlan</option>
+                                        <option>Cabañas</option>
+                                        <option>La Union</option>
+                                        <option>La Paz</option>
+                                        <option>Morazan</option>
+                                        <option>San Vicente</option>
+                                        <option>Usulutan</option>
+                                        <option>San Miguel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row p-1">
+                                    <div class="col-md-2 col-md-2">
+                                        <label for="txtMunicipio">MUNICIPIO:</label>
+                                    </div>
+                                    <div class="col-9 col-md-6">
+                                        <input v-model="Alumno.Municipio" type="text" class="form-control" name="txtDireccion" id="txtDireccion">
+                                    </div>
+                                </div> 
+                                <div class="row p-1">
+                                    <div class="col-md-2 col-md-2">
+                                        <label for="txtDireccion">DIRECCION:</label>
+                                    </div>
+                                    <div class="col-9 col-md-6">
+                                        <input v-model="alumno.direccion" type="text" class="form-control" name="txtTelefono" id="txtDireccion">
+                                    </div>
+                                </div>
+                                <div class="row p-1">
+                                    <div class="col-md-2 col-md-2">
+                                        <label for="txtTelefono">TELEFONO:</label>
+                                    </div>
+                                    <div class="col-9 col-md-6">
+                                        <input required pattern="[0-9]{11}" 
+                                        v-model="alumno.telefono" type="text" class="form-control" name="txtTelefono" id="txtTelefono">
+                                    </div>
+                                </div> 
+                                <div class="row p-1">
+                                    <div class="col-3 col-md-2">FECHA DE NACIMIENTO:</div>
+                                    <div class="col-9 col-md-6">
+                                         <input class="form-control" type="date"  v-model="alumno.fechan" name="txtFechaNAlumno"  id="txtFechaNAlumno">
+                                    </div>
+                                <div class="row p-1">
+                                    <div class="col-3 col-md-3">
+                                        <input class="btn btn-primary" type="submit" 
+                                            value="Guardar">
+                                    </div>
+                                    <div class="col-3 col-md-3">
+                                        <input class="btn btn-warning" type="reset" value="Nuevo">
+                                    </div>
+                                </div>
+                        </form>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3 col-md-2">
-                        <label for="txtDireccion">DIRECCION</label>
-                    </div>   
-                    <div class="col-md-9 col-md-6">
-                        <input required pattern="[A-Za-zÑñáéíóú ]"
-                            title="ingrese una direccion exacta"
-                                type="text" class="form.control.sm" name="txtDireccion" id="txtDireccion">
+            </div> 
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-header">LISTADO DE ALUMNOS</div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>BUSCAR:</th>
+                                    <th colspan="2"><input type="text" class="form-control" v-model="buscar"
+                                        @keyup="listarAlumnos()"
+                                        placeholder="Buscar por codigo o nombre"></th>
+                                </tr>
+                                <tr>
+                                    <th>CODIGO</th>
+                                    <th colspan="2">NOMBRE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="alumno in alumnos" :key="alumno.idAlumno" @click="modificarAlumno(alumno)" >
+                                    <td>{{ alumno.codigo }}</td>
+                                    <td>{{ alumno.nombre }}</td>
+                                    <td><button class="btn btn-danger" @click="eliminarAlumno(alumno)">ELIMINAR</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3 col-md-2">
-                        <Label for="txtDepartamento">DEPARTAMENTO</Label>
-                        <input class="form-control" list="listDatos" id="listDatos" placeholder="Escribe para buscar..." name="seach">
-                    </div>
-                    
-                </div>
-            </form>
+            </div>
         </div>
-        
     </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>
