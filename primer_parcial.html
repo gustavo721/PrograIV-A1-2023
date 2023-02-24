@@ -51,7 +51,7 @@
                                         <label for="txtzona">ZONA:</label>
                                     </div>
                                     <div class="col-md-9 col-md-6">
-                                        <input v-model="alumno.zona" type="text" class="form-control" name="txtzona" id="txtzona">
+                                        <input type="radio" name="txtzona" value="R" /> Rural <input type="radio" name="txtzona" value="U" /> Urbana
                                     </div>
                                 </div> 
 
@@ -79,7 +79,7 @@
                                 <tr>
                                     <th>BUSCAR:</th>
                                     <th colspan="2"><input type="text" class="form-control" v-model="buscar"
-                                        @keyup="listaraclientes()"
+                                        @keyup="listarclientes()"
                                         placeholder="Buscar por nombre"></th>
                                 </tr>
                                 <tr>
@@ -128,8 +128,8 @@
                    this.cliente.codigo = '';
                    this.cliente.nombre = '';
                    
-                   this.alumno.direccion = '';              
-                   this.alumno.zona = '';
+                   this.cliente.direccion = '';              
+                   this.cliente.zona = '';
                 },
                  modificacliente(cliente){
                    this.accion = 'modificar';
@@ -141,29 +141,29 @@
                        this.cliente.idcliente = new Date().getTime().toString(16);
                        this.clientes.push( JSON.parse( JSON.stringify(this.cliente) ) );
                    }else if(this.accion==='modificar'){
-                       let index = this.alumnos.findIndex(alumno=>alumno.idalumno==this.alumno.idalumno);
-                       this.alumnos[index] = JSON.parse( JSON.stringify(this.alumno) );
+                       let index = this.clientes.findIndex(cliente=>cliente.idcliente==this.cliente.idcliente);
+                       this.clientes[index] = JSON.parse( JSON.stringify(this.cliente) );
                    }else if(this.accion==='eliminar'){
-                       let index = this.alumnos.findIndex(alumno=>alumno.idalumno==this.alumno.idalumno);
-                       this.alumnos.splice(index,1);
+                       let index = this.clientes.findIndex(cliente=>cliente.idcliente==this.cliente.idcliente);
+                       this.clientes.splice(index,1);
                    }
-                   localStorage.setItem("alumnos", JSON.stringify(this.alumnos) );
-                   this.nuevoalumno();
+                   localStorage.setItem("clientes", JSON.stringify(this.clientes) );
+                   this.nuevocliente();
                },
                eliminarcliente(cliente){
-                   if( confirm(`Esta seguro que desea eliminar a ${alumno.nombre}?`) ){
+                   if( confirm(`Esta seguro que desea eliminar a ${cliente.nombre}?`) ){
                        this.accion='eliminar';
-                       this.alumno=alumno;
-                       this.guardaralumno();
+                       this.cliente=cliente;
+                       this.guardarcliente();
                    }
                },
-               listaralumnos(){
-                   this.alumnos = JSON.parse( localStorage.getItem('alumnos') || "[]" )
-                       .filter(alumno=>alumno.nombre.toLowerCase().indexOf(this.buscar.toLowerCase())>-1);
+               listarclientes(){
+                   this.clientes = JSON.parse( localStorage.getItem('clientes') || "[]" )
+                       .filter(cliente=>cliente.nombre.toLowerCase().indexOf(this.buscar.toLowerCase())>-1);
                }
            },
            created(){
-               this.listaralumnos();
+               this.listarclientes();
            }
        }).mount('#app');
    </script>
